@@ -23,15 +23,6 @@
         <label for="phone">電話番号:</label>
         <input class="form-control w-100 mt-1" type="tel" maxlength="11" id="phone" name="phone" required><br><br>
 
-
-/*        <label for="category">カテゴリー:</label>
-	  <select id="category" name="category" required>
-          <option value="グルメ">グルメ</option>
-          <option value="ショッピング">ショッピング</option>
-          <option value="サービス">サービス</option>
-          <option value="その他">その他</option>
-          </select><br><br>
-*/
         <label for="shop_intro">投稿内容:</label>
         <textarea  maxlength="60" id="content" name="content" required></textarea><br><br>
 
@@ -77,7 +68,6 @@
             formData.append('phone', document.getElementById('phone').value);
             formData.append('content', document.getElementById('content').value);
             formData.append('start_day', document.getElementById('start_day').value);
-//            formData.append('category', document.getElementById('category').value);
             
             liff.sendMessages([
                 {
