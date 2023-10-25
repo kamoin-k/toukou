@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鴨川市商工会公式ライン投稿窓口</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+
+</head>
+<body>
+    <form id="myForm" class="w-75 mx-auto">
+        <input type="hidden" id="user_id" name="user_id"> 
+        
+        <label for="shop_name">事業所名:</label>
+        <input class="form-control w-100 mt-1" type="text" id="shop_name" name="shop_name" required><br><br>
+
+        <label for="address">担当者名:</label>
+        <input class="form-control w-100 mt-1" type="text" id="manager" name="manager" required><br><br>
+
+        <label for="phone">電話番号:</label>
+        <input class="form-control w-100 mt-1" type="tel" maxlength="11" id="phone" name="phone" required><br><br>
+
+
+/*        <label for="category">カテゴリー:</label>
+	  <select id="category" name="category" required>
+          <option value="グルメ">グルメ</option>
+          <option value="ショッピング">ショッピング</option>
+          <option value="サービス">サービス</option>
+          <option value="その他">その他</option>
+          </select><br><br>
+*/
+        <label for="shop_intro">投稿内容:</label>
+        <textarea  maxlength="60" id="content" name="content" required></textarea><br><br>
+
+        <label for="price">掲載開始日:</label>
+        <input class="form-control w-100 mt-1" type="text" id="start_day" name="start_day" required><br><br>
+
+        <input type="submit" value="送信">
+    </form>
+
+    <script>
+        // LIFF SDKの初期化
+        async function initializeLiff() {
+            try {
+                await liff.init({ liffId: '2001325181-O6pxonmR' });  // ご自身のLIFF IDに置き換えてください
+                displayLiffData();
+            } catch (error) {
+                console.error('LIFF initialization failed', error);
+            }
+        }
+        initializeLiff();
+
+        // フォームの送信イベントのハンドラ
+        document.getElementById('myForm').addEventListener('submit', submitForm);
+
+        // スプレッドシートのデータを取得し、フォームに表示
+        async function displayLiffData() {
+            try {
+                const profile = await liff.getProfile();
+                const user_id = profile.userId;
+            } catch (error) {
+                console.error('Failed to fetch data from spreadsheet', error);
+            }
+        }
+
+        // フォームのデータをLINE Botに送信
+        function submitForm(event) {
+            event.preventDefault();  // デフォルトのフォーム送信をキャンセル
+
+            var formData = new FormData();
+            formData.append('user_id', document.getElementById('user_id').value);
+            formData.append('shop_name', document.getElementById('shop_name').value);
+            formData.append('manager', document.getElementById('manager').value);
+            formData.append('phone', document.getElementById('phone').value);
+            formData.append('content', document.getElementById('content').value);
+            formData.append('start_day', document.getElementById('start_day').value);
+//            formData.append('category', document.getElementById('category').value);
+            
+            liff.sendMessages([
+                {
+                    type: 'text',
+                    text: '事業所名: ' + formData.get('shop_name') + '\n担当者名: ' + formData.get('manager') + '\n電話番号: ' + formData.get('phone') + 
+                          '\n投稿内容: ' + formData.get('content') + '\n掲載開始日:' + formData.get('start_day') + 
+                          '\nお店の紹介:' + formData.get('shop_intro') +  '\nお店のおすすめ:' + formData.get('price')  + 
+                          '\n入力ありがとうございます。\n\n続けて記事内容に関する画像がある場合はアップしてください。\n商工会からの連絡をお待ちください。'
+                }
+            ]).then(() => {
+                // 送信成功時にデータをリセット
+                document.getElementById('myForm').reset();
+                updateSpreadsheet(formData);
+        		liff.closeWindow();
+            }).catch((error) => {
+                console.error('Failed to send message', error);
+            });
+        }
+
+        // スプレッドシートのデータを更新
+        function updateSpreadsheet(formData) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://script.google.com/macros/s/AKfycbxQyVTR8U2Ck1HJ1JXYV07yEYossouW0hH2H1EHuH42NhFO8grCOBmZrE9PnPinvVQdfg/exec', true);  // ご自身のGAS WebアプリのURLに置き換えてください
+
+            // フォームデータを送信
+            xhr.send(formData);
+        }
+    </script>
+</body>
+</html>
