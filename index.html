@@ -90,7 +90,7 @@
         function updateSpreadsheet(formData) {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'https://script.google.com/macros/s/AKfycbyFfNUSBLRqJ4KJUZpxjC_EbxcdcSReYT66Xe7o-YqKI-6xZ_IY2oL6r5HZNfj2OYMufg/exec', true);  // ご自身のGAS WebアプリのURLに置き換えてください
-
+            document.write("\nフォームデータは、" + formData + "です");
             // フォームデータを送信
             xhr.send(formData);
         }
