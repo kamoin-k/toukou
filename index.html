@@ -80,7 +80,7 @@
                 // 送信成功時にデータをリセット
                 document.getElementById('myForm').reset();
                 updateSpreadsheet(formData);
-//        		liff.closeWindow();
+        		liff.closeWindow();
             }).catch((error) => {
                 console.error('Failed to send message', error);
             });
@@ -89,8 +89,8 @@
         // スプレッドシートのデータを更新
         function updateSpreadsheet(formData) {
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://script.google.com/macros/s/AKfycbyFfNUSBLRqJ4KJUZpxjC_EbxcdcSReYT66Xe7o-YqKI-6xZ_IY2oL6r5HZNfj2OYMufg/exec', true);  // ご自身のGAS WebアプリのURLに置き換えてください
-            document.write("\nフォームデータは、" + formData + "です");
+            xhr.open('POST', 'https://script.google.com/macros/s/AKfycbwt5KO2dBkj-kmvSk143utXhuzoISMZOOwx4uf4GzBSOgLa5lZ9kBrYKeG6jgq0ywGnag/exec', true);  // ご自身のGAS WebアプリのURLに置き換えてください
+           // document.write("\nフォームデータは、" + formData + "です");
             // フォームデータを送信
             xhr.send(formData);
         }
