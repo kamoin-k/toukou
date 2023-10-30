@@ -60,10 +60,10 @@
                 if (data) {
                     document.getElementById('user_id').value = data.user_id;
                     document.getElementById('shop_name').value = data.shop_name;
-                    document.getElementById('manager').value = data.address;
+                    document.getElementById('manager').value = data.manager;
                     document.getElementById('phone').value = data.phone;
-                    document.getElementById('content').value = data.business_hours;
-                    document.getElementById('start_day').value = data.regular_holiday
+                    document.getElementById('content').value = data.content;
+                    document.getElementById('start_day').value = data.start_day;
             } catch (error) {
                 console.error('Failed to fetch data from spreadsheet', error);
             }
