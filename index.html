@@ -51,7 +51,8 @@
         async function displayLiffData() {
             try {
                 const profile = await liff.getProfile();
-                const user_id = profile.userId; 
+                const userId = profile.userId; 
+                document.getElementById('user_id').value = userId;
             } catch (error) {
                 console.error('Failed to fetch data from spreadsheet', error);
             }
