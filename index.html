@@ -47,23 +47,11 @@
         // フォームの送信イベントのハンドラ
         document.getElementById('myForm').addEventListener('submit', submitForm);
 
-        // スプレッドシートのデータを取得し、フォームに表示
+        // ユーザーIDを取得
         async function displayLiffData() {
             try {
                 const profile = await liff.getProfile();
-                const user_id = profile.userId;
-                
-                 // 既存データを取得し、フォームに表示
-                const response = await fetch('https://script.google.com/macros/s/AKfycbwTKE2WsjlOD9EcQub0Z9vmZV0bgz5p1fPC8oi7LEirW1nhUavy0xeM6EkmlvtRkSCf3A/exec?user_id=' + user_id);  // ご自身のGAS WebアプリのURLに置き換えてください
-                const data = await response.json();
-
-                if (data) {
-                    document.getElementById('user_id').value = data.user_id;
-                    document.getElementById('shop_name').value = data.shop_name;
-                    document.getElementById('manager').value = data.manager;
-                    document.getElementById('phone').value = data.phone;
-                    document.getElementById('content').value = data.content;
-                    document.getElementById('start_day').value = data.start_day;
+                const user_id = profile.userId; 
             } catch (error) {
                 console.error('Failed to fetch data from spreadsheet', error);
             }
@@ -102,7 +90,7 @@
         function updateSpreadsheet(formData) {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'https://script.google.com/macros/s/AKfycbwTKE2WsjlOD9EcQub0Z9vmZV0bgz5p1fPC8oi7LEirW1nhUavy0xeM6EkmlvtRkSCf3A/exec', true);  // ご自身のGAS WebアプリのURLに置き換えてください
-           // document.write("\nフォームデータは、" + formData + "です");
+         
             // フォームデータを送信
             xhr.send(formData);
         }
