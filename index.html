@@ -24,7 +24,7 @@
         <input class="form-control w-100 mt-1" type="tel" maxlength="11" id="phone" name="phone" required><br><br>
 
         <label for="content">投稿内容:</label>
-        <input class="form-control w-100 mt-1" type="text" id="content" name="content" required><br><br>
+        <textarea class="form-control w-100 mt-1" maxlength="100" id="content" name="content" required></textarea><br><br>
 
         <label for="start_day">掲載開始日:</label>
         <input class="form-control w-100 mt-1" type="date" id="start_day" name="start_day" required><br><br>
@@ -90,7 +90,7 @@
         // スプレッドシートのデータを更新
         function updateSpreadsheet(formData) {
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://script.google.com/macros/s/AKfycbzmJ8uHNAJ07tyGE83y3zXo7jBxUua3THWu7E02q1fWpWk5REmepLYlLrKqmXZJgZhwYw/exec', true);  // ご自身のGAS WebアプリのURLに置き換えてください
+            xhr.open('POST', 'https://script.google.com/macros/s/AKfycbzXE6XD3yYAaxJcIZM3oJErbSlI3e9wVT212O8OhRrwTD__Oep3VSC8hRQEnm-3u-6l_g/exec', true);  // ご自身のGAS WebアプリのURLに置き換えてください
          
             // フォームデータを送信
             xhr.send(formData);
