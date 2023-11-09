@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鴨川市商工会公式ライン投稿窓口</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+
+</head>
 <body>
     <form id="myForm" class="w-75 mx-auto">
         <input type="hidden" id="user_id" name="user_id"> 
@@ -63,7 +77,7 @@
                     type: 'text',
                     text: '事業所名: ' + formData.get('shop_name') + '\n担当者名: ' + formData.get('manager') + '\n電話番号: ' + formData.get('phone') + 
                           '\n投稿内容: ' + formData.get('content') + '\n掲載開始日:' + formData.get('start_day') + 
-                          '\n\n入力ありがとうございます。\n\n続けて記事内容に関する画像がある場合はアップしてください。\n商工会からの連絡をお待ちください。'
+                          '\n\n上記の内容で配信を受け付けました。'
                 }
             ]).then(() => {
                 // 送信成功時にデータをリセット
@@ -78,7 +92,7 @@
         // スプレッドシートのデータを更新
         function updateSpreadsheet(formData) {
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://script.google.com/macros/s/AKfycbwlA2f-yvucsu_ZE3hGIuTih_i6eRMTvPmmzYFCej3zQGNaTbDPqImzSEfWogRFVsbZEA/exec', true);  // ご自身のGAS WebアプリのURLに置き換えてください
+            xhr.open('POST', 'https://script.google.com/macros/s/AKfycbzXE6XD3yYAaxJcIZM3oJErbSlI3e9wVT212O8OhRrwTD__Oep3VSC8hRQEnm-3u-6l_g/exec', true);  // ご自身のGAS WebアプリのURLに置き換えてください
          
             // フォームデータを送信
             xhr.send(formData);
