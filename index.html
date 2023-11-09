@@ -38,7 +38,7 @@
         // LIFF SDKの初期化
         async function initializeLiff() {
             try {
-                await liff.init({ liffId: '2001325181-O6pxonmR',withLoginOnExternalBrowser: true });  // ご自身のLIFF IDに置き換えてください
+                await liff.init({ liffId: '2001325181-O6pxonmR' });  // ご自身のLIFF IDに置き換えてください
                 displayLiffData();
             } catch (error) {
                 console.error('LIFF initialization failed', error);
