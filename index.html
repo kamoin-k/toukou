@@ -58,18 +58,11 @@
                 // ユーザーIDをフォームに表示
                 document.getElementById('user_id').value = userId;
 
-                // 既存データを取得し、フォームに表示
-                const response = await fetch('https://script.google.com/macros/s/AKfycbw3uVJdY3oBb6lEF0kfgreLO5qHKd85kx_Z_UPSXgdxOKIlhszxHD23othwIRPIIrTl5A/exec?user_id=' + userId);  // ご自身のGAS WebアプリのURLに置き換えてください
+                // 既存データを取得し、フォームに表示 ではなくて一回行ってみることにする
+                const response = await fetch('https://script.google.com/macros/s/AKfycbwlA2f-yvucsu_ZE3hGIuTih_i6eRMTvPmmzYFCej3zQGNaTbDPqImzSEfWogRFVsbZEA/exec);  // ご自身のGAS WebアプリのURLに置き換えてください
                 const data = await response.json();
+                document.getElementById('user_id').value = userId;
 
-                if (data) {
-                    document.getElementById('shop_name').value = data.shop_name;
-                    document.getElementById('manager').value = data.manager;
-                    document.getElementById('phone').value = data.phone;
-                    document.getElementById('content').value = data.content;
-                    document.getElementById('start_day').value = data.start_day;
-                }
-                // document.getElementById('user_id').value = userId;
             } catch (error) {
                 console.error('Failed to fetch data from spreadsheet', error);
             }
@@ -107,7 +100,7 @@
         // スプレッドシートのデータを更新
         function updateSpreadsheet(formData) {
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://script.google.com/macros/s/AKfycbw3uVJdY3oBb6lEF0kfgreLO5qHKd85kx_Z_UPSXgdxOKIlhszxHD23othwIRPIIrTl5A/exec', true);  // ご自身のGAS WebアプリのURLに置き換えてください
+            xhr.open('POST', 'https://script.google.com/macros/s/AKfycbwlA2f-yvucsu_ZE3hGIuTih_i6eRMTvPmmzYFCej3zQGNaTbDPqImzSEfWogRFVsbZEA/exec', true);  // ご自身のGAS WebアプリのURLに置き換えてください
          
             // フォームデータを送信
             xhr.send(formData);
